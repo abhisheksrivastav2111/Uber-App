@@ -1,29 +1,47 @@
 import React from 'react'
-import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import  { useState, useContext } from 'react'
+import { Link ,useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import {UserDataContext} from '../context/UserContext'
+
 
 function Usersignup () {
    
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
-  const [ firstName, setFirstName ] = useState('')
-  const [ lastName, setLastName ] = useState('')
-  const [ userData, setUserData ] = useState({})
+  const [ firstname, setFirstName ] = useState('')
+  const [ lastname, setLastName ] = useState('')
+  const [ userData, setUserData ] = useState('')
 
-    
+  const navigate = useNavigate()
+  const [ user, setUser ] = useContext(UserDataContext);
+
   const submitHandler = async (e) => {
     e.preventDefault()
     const newUser = {
       fullname: {
-        firstname: firstName,
-        lastname: lastName
+        firstname: firstname,
+        lastname: lastname
       },
       email: email,
       password: password
 
     
     }
-  setUserData(newUser);
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
+     console.log(response);
+    if(response.status === 201){
+    const data= response.data
+    localStorage.setItem('token', data.token)
+    setUser(data.user)
+    navigate('/home')
+
+
+   }
+
+
+
+
   console.log(userData)
     setEmail('')
     setFirstName('')
@@ -47,7 +65,7 @@ function Usersignup () {
                 className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
                 type="text"
                 placeholder='First name'
-                value={firstName}
+                value={firstname}
                 onChange={(e) => {
                   setFirstName(e.target.value)
                 }}
@@ -57,7 +75,7 @@ function Usersignup () {
                 className='bg-[#eeeeee] w-1/2  rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
                 type="text"
                 placeholder='Last name'
-                value={lastName}
+                value={lastname}
                 onChange={(e) => {
                   setLastName(e.target.value)
                 }}
