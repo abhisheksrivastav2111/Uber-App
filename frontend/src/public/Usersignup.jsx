@@ -49,8 +49,8 @@ function Usersignup () {
     setPassword('')
   }
   return (
-    <div>
-      <div className='p-7 h-screen flex flex-col justify-between'>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-300  to-white">
+      <div className="relative z-10 bg-white bg-opacity-95 p-10 rounded-xl shadow-2xl max-w-md w-full">
         <div>
           <img className='w-16 mb-10' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s" alt="" />
 
@@ -118,7 +118,7 @@ function Usersignup () {
             Policy</span> and <span className='underline'>Terms of Service apply</span>.</p>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 export default Usersignup;
