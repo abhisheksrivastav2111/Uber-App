@@ -4,7 +4,9 @@ function LookingForDriver(props){
      return(
           <div>
           <h5
-            
+            onClick={()=>{
+              props.setVehicleFound(false)
+            }}
             className="p-3 text-center absolute top-0 w-[93%]"
             
           >
@@ -57,7 +59,7 @@ function LookingForDriver(props){
     
             
           </div>
-        </div>
+         </div>
      )
 }
 export default LookingForDriver;
