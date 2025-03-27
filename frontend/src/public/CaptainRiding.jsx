@@ -66,19 +66,12 @@ function CaptainRiding(){
       </h5>
           <h4 className="text-2xl  font-semibold">4Km Away</h4>
           <button className=" bg-green-400 font-semibold p-3 px-12 rounded-lg">Complete Ride</button>
-           
-          </div>
+           </div>
          
 
           <div ref={ finshRideRef} className="fixed w-full z-10 bottom-0 translate-y-0 bg-white px-3 py-7 pt-12">
             <FinishRide setFinishRidePanel={setFinishRidePanel}/>
-    
-          
-    
-    
-    
-    
-        </div>
+          </div>
         </div>
      )
 }
