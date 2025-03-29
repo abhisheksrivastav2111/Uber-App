@@ -15,7 +15,7 @@ const rideRoute = require('./routes/ride.route')
 connectToDb();
 
 
-app.use(cors());
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookiesParser());
@@ -24,7 +24,7 @@ app.get('/',(req,res) =>{
 });
 app.use('/users',userRoute);
 app.use('/captains',  captainRoute);
-app.use('/map',mapRoutes);
+app.use('/maps',mapRoutes);
 app.use('/ride' , rideRoute);
 
 

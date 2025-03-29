@@ -11,6 +11,8 @@ function getOtp(num) {
     }
     return generateOtp(num);
 }
+
+module.exports.getOtp = getOtp;
 async function getFare(pickup,destination){
      if(!pickup || !destination){
           throw new Error("pickup or destination is not defined");
@@ -45,6 +47,7 @@ async function getFare(pickup,destination){
   
       return fare;
 }
+module.exports.getFare = getFare;
 
 module.exports.createRide = async ({
      user, pickup, destination, vehicleType
@@ -68,4 +71,4 @@ module.exports.createRide = async ({
  
      return ride;
  }
-
+ module.exports.getFare = getFare;

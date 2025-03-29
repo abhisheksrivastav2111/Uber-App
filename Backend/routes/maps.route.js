@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../middlewares/auth.middleware");
 const mapController = require("../controllers/map.controller");
-const { query } = require("express-validator");
+const {body, query } = require("express-validator");
 
 router.get(
   "/get-coordinate",
@@ -25,6 +25,7 @@ router.get("/get-suggestions",
   mapController.getAutoCompleteSuggestions
 
 
-)
+);
+
 
 module.exports = router;
