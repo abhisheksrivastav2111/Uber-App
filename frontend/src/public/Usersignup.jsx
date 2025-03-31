@@ -11,13 +11,13 @@ function Usersignup () {
   const [ password, setPassword ] = useState('')
   const [ firstname, setFirstName ] = useState('')
   const [ lastname, setLastName ] = useState('')
-  const [ userData, setUserData ] = useState('')
+ 
 
   const navigate = useNavigate()
-  const [ user, setUser ] = useContext(UserDataContext);
+  const {user, setUser } = useContext(UserDataContext);
 
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault(e)
     const newUser = {
       fullname: {
         firstname: firstname,
@@ -42,7 +42,7 @@ function Usersignup () {
 
 
 
-  console.log(userData)
+ 
     setEmail('')
     setFirstName('')
     setLastName('')

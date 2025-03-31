@@ -1,4 +1,4 @@
-import React, { useRef, useState,useEffect, use } from "react";
+import React, { useRef, useState,useEffect, } from "react";
  import { useGSAP } from '@gsap/react';
  import gsap from "gsap";
  import axios from 'axios';
@@ -8,7 +8,14 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver"
- 
+import { SocketContext } from "../context/SocketContext";
+import { useContext } from "react";
+import { UserDataContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 function Home() {
   const [pickup, setPickup] = useState("");
@@ -36,6 +43,36 @@ function Home() {
   const [activeFeild , setActiveFeild] = useState(null);
 const [fare,setFare] = useState({})
 const [ vehicleType, setVehicleType ] = useState(null)
+const [ ride, setRide ] = useState(null)
+
+const navigate = useNavigate();
+
+const {socket} = useContext(SocketContext);
+const {user } = useContext(UserDataContext);
+
+
+
+useEffect(()=>{
+  
+socket.emit("join" , {userType:"user" , userId : user._id})
+}, [user])
+
+socket.on('ride-confirmed' , (ride)=>{
+  setVehicleFound(false)
+  setWaitingForDriver(true);
+  setRide(ride)
+})
+
+socket.on('ride-started', ride => {
+  console.log("ride")
+  setWaitingForDriver(false)
+  navigate('/riding', { state: { ride } })
+})
+
+
+
+
+
 
 
 
@@ -169,6 +206,8 @@ async function findTrip(){
 }
 
 async function createRide(){
+
+  
   const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/ride/create`,{
     
       pickup,
@@ -179,7 +218,9 @@ async function createRide(){
           Authorization: `Bearer ${localStorage.getItem('token')}`
       }
   })
-  console.log(response.data);
+
+ console.log( "response is "+{response});
+  
 }
   return (
     <div className="h-screen relative overflow-hidden">
@@ -286,7 +327,12 @@ async function createRide(){
          />
       </div>
       <div ref={waitingForDriverRef}  className="fixed w-full z-10 bottom-0 translate-y-0 bg-white px-3 py-7 pt-12">
-        <WaitingForDriver waitingForDriver={waitingForDriver}/>
+        <WaitingForDriver
+        ride={ride}
+        setVehicleFound={setVehicleFound}
+        
+        waitingForDriver={waitingForDriver}
+        />
       </div>
       
 

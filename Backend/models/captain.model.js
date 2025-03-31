@@ -17,7 +17,10 @@ email:{type:String, required: true,
           required: true,
           select: false
      },
-     soketId: {type: String},
+     socketId:{
+          type:String,
+     
+         },
      status:{
           type:String,
           enum:['active','inactive'],
@@ -49,7 +52,7 @@ email:{type:String, required: true,
 
      },
      location:{
-          lat:{
+          ltd:{
                type:Number,
                
           },

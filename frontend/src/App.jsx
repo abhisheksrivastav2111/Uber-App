@@ -25,7 +25,7 @@ function App() {
          <Route path='/' element={<Start/>} />
          <Route path='/captain-home' element={<CaptainProtectWrapper> <Captainhome/> </CaptainProtectWrapper>  } />
         <Route path='/captain-logout' element={<Captainlogout/>} />
-        <Route path='/captainriding' element={<CaptainRiding/>} />
+        <Route path='/captain-riding' element={<CaptainRiding/>} />
          <Route path='/userlogin' element={<Userlogin/>} />
          <Route path='/riding' element={<Riding/>} />
          <Route path='/usersignup' element={<Usersignup/>} />
